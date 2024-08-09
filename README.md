@@ -37,3 +37,25 @@ Just taking notes about questions I'd love to be asked in my next interview
 
     ### Okay how to achieve the ACID ?
         ACD : can be achieved by using a WAL 
+
+# Explain the Isolation Levels ?
+### Dirty Write :
+![](dirty-writes.png)
+    - Dirty write is simple writing new data over an uncommitted written data from another TX.
+
+#### How to fix Dirty-Write ?
+    - By using `row-locking`, but this maybe causes dead-lock 
+    - EXAMPLE : 
+        - TX_1 locks k1 
+        - TX_2 locks k2 
+        - TX_2 tries to lock k1 but failed 
+        - TX_1 tries to lock k2 but failed 
+        - [DEADLOCK]
+
+    - SOLUTION: 
+        - perform row locking by order of the key 
+            - TX_1 locks k1 
+            - TX_2 tries to lock k1 but failed 
+            - TX_2 now stucks untill lock k1 is released so it cannot lock k2  
+            - TX_1 locks k2 .. finishs .. release ... commit 
+            - TX_2 can continue by lcoking on k1 and then k2  
