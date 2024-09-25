@@ -59,3 +59,11 @@ Just taking notes about questions I'd love to be asked in my next interview
             - TX_2 now stucks untill lock k1 is released so it cannot lock k2  
             - TX_1 locks k2 .. finishs .. release ... commit 
             - TX_2 can continue by lcoking on k1 and then k2  
+
+### Write Skew : 
+![](skew-write.png)
+
+# Kafka 
+### What is the size of data a single broker can store ? and what is the number of msgs per second a broker can receive ?
+- A broker can store 1TB of data
+- A broker can receives 10,000 msgs per second
